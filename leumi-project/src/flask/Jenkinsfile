@@ -7,17 +7,17 @@ pipeline {
     stages {
          stage('Clone repository') { 
             steps { 
-                script{
-                  git clone http://github.com/Olka0/project-leimi-bank.git
-                }
+                withCredentials([usernamePassword(credentialsId: 'berchakuwa', passwordVariable: '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', usernameVariable: 'GIT_USERNAME')]) {
+                    sh '''
+                         git clone https://github.com/Olka0/project-leimi-bank.git
+                       '''
+                  }
             }
         }
 
         stage('Build') { 
             steps { 
-                script{
-                 app = docker.build("underwater")
-                }
+                echo 'Test'
             }
         }
         stage('Test'){
@@ -28,10 +28,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script{
-                        docker.withRegistry('https://720766170633.dkr.ecr.us-east-2.amazonaws.com', 'ecr:us-east-2:aws-credentials') {
-                    app.push("${env.BUILD_NUMBER}")
-                    app.push("latest")
-                    }
+                      echo "push to registry image"
                 }
             }
         }
