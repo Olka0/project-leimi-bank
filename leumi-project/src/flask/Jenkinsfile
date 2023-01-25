@@ -7,11 +7,13 @@ pipeline {
     stages {
          stage('Clone repository') { 
             steps { 
-                withCredentials([usernamePassword(credentialsId: 'berchakuwa', passwordVariable: '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', usernameVariable: 'GIT_USERNAME')]) {
-                    sh '''
-                        git config --global user.name berchakuwa
+                 sh '''
+                    git config --global user.name berchakuwa
                         git config --global user.email berchakuwa@gmail.com
                         git config -l
+                    '''
+                withCredentials([usernamePassword(credentialsId: 'berchakuwa', passwordVariable: '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', usernameVariable: 'GIT_USERNAME')]) {
+                    sh '''
                         git clone https://github.com/Olka0/project-leimi-bank.git
                        '''
                   }
