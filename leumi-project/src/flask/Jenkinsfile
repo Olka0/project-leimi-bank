@@ -12,18 +12,14 @@ pipeline {
                         git config --global user.email berchakuwa@github.com
                         git config -l
                     '''
-                withCredentials([usernamePassword(credentialsId: '0a987b06-ae29-4f7e-91b3-a9de0e38aa00', passwordVariable: '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', usernameVariable: 'GIT_USERNAME')]) {
-                    sh '''
-                        git clone https://github.com/Olka0/project-leimi-bank.git
-                       '''
-                  }
-            }
+                 }
         }
 
         stage('Build') { 
             steps { 
                 sh '''
                    cd leumi-project/src/flask
+                   usermod -a -G sudo jenkins
                    docker image build -t flask_docker .
                    '''
             }
