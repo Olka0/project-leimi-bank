@@ -37,7 +37,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                step('tag+push'){
+                step('Deploy'){
                    sh '''
                       echo "push to registry image"
                       docker tag flask_docker 1berchakuwa/flask-docker
