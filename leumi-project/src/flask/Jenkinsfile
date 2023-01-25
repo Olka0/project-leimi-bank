@@ -8,7 +8,7 @@ pipeline {
          stage('Clone repository') { 
             steps { 
                 script{
-                git clone http://github.com/Olka0/project-leimi-bank.git
+                  git clone http://github.com/Olka0/project-leimi-bank.git
                 }
             }
         }
