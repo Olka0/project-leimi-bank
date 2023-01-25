@@ -25,13 +25,15 @@ pipeline {
                 sh '''
                    cd leumi-project/src/flask
                    docker image build -t flask_docker .
-                   
+                   '''
             }
         }
         stage('Test'){
             steps {
+               sh ''' 
                  docker run -p 5000:5000 -d flask_docker
-            }
+               '''  
+           }
         }
         stage('Deploy') {
             steps {
