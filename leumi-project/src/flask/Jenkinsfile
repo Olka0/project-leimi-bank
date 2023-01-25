@@ -8,11 +8,11 @@ pipeline {
          stage('Clone repository') { 
             steps { 
                  sh '''
-                    git config --global user.name berchakuwa
+                        git config --global user.name berchakuwa
                         git config --global user.email berchakuwa@gmail.com
                         git config -l
                     '''
-                withCredentials([usernamePassword(credentialsId: 'berchakuwa', passwordVariable: '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', usernameVariable: 'GIT_USERNAME')]) {
+                withCredentials([usernamePassword(credentialsId: '0a987b06-ae29-4f7e-91b3-a9de0e38aa00', passwordVariable: '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', usernameVariable: 'GIT_USERNAME')]) {
                     sh '''
                         git clone https://github.com/Olka0/project-leimi-bank.git
                        '''
@@ -22,18 +22,25 @@ pipeline {
 
         stage('Build') { 
             steps { 
-                echo 'Test'
+                sh '''
+                   cd leumi-project/src/flask
+                   docker image build -t flask_docker .
+                   
             }
         }
         stage('Test'){
             steps {
-                 echo 'Empty'
+                 docker run -p 5000:5000 -d flask_docker
             }
         }
         stage('Deploy') {
             steps {
-                script{
+                step('tag+push'){
+                   sh '''
                       echo "push to registry image"
+                      docker tag flask_docker 1berchakuwa/flask-docker
+                      docker push 1berchakuwa/flask-docker
+                   '''
                 }
             }
         }
