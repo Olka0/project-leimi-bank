@@ -1,0 +1,15 @@
+kind: Service 
+apiVersion : v1 
+metadata:
+  name: ngnix-project-service 
+  labels:
+     env: dev
+     owner: Olga Partin
+spec:
+  selector:
+    project: ngnix-project
+  ports:
+     - name: ngnix-project-listener
+       port: 80 
+       targetPort: 80
+  type: LoadBalancer

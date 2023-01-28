@@ -1,0 +1,4 @@
+container:
+   image: 1berchakuwa/hello-world:latest 
+
+replicaCount: 2

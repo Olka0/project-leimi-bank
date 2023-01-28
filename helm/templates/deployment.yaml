@@ -1,0 +1,21 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: leumi-project
+  labels:
+    app : hello-world-app
+spec:
+  selector:
+    matchLabels:
+      project: leumi-project
+  template:
+    metadata:
+      labels:
+        project: leumi-project
+    spec:
+      containers:
+        - name: helm-leumi-project-web
+          image: 1berchakuwa/hello-world:latest
+          ports:
+            - containerPort: 80   
+

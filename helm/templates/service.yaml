@@ -1,0 +1,15 @@
+kind: Service 
+apiVersion : v1 
+metadata:
+  name: leumi-project-service 
+  labels:
+     env: dev
+     owner: OlgaPartin
+spec:
+  selector:
+    project: leumi-project
+  ports:
+     - name: leumi-project-listener
+       port: 80 
+       targetPort: 80
+  type: LoadBalancer
